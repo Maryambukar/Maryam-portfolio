@@ -1,0 +1,18 @@
+{% load static %}
+<footer class="site-footer">
+  <div class="footer-band">
+    <div class="footer-band-text">
+      <h3>Let's Work Together!</h3>
+      <p>I'm open to internships, collaborations, and exciting opportunities.</p>
+    </div>
+    <a href="{% url 'contact:contact' %}" class="btn btn-cream">Get In Touch →</a>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; {% now "Y" %} {{ site_owner.name }}. All rights reserved.</span>
+    <div class="footer-socials">
+      {% if site_owner.linkedin_url %}<a href="{{ site_owner.linkedin_url }}" target="_blank" rel="noopener">LinkedIn</a>{% endif %}
+      {% if site_owner.github_url %}<a href="{{ site_owner.github_url }}" target="_blank" rel="noopener">GitHub</a>{% endif %}
+      {% if site_owner.email %}<a href="mailto:{{ site_owner.email }}">Email</a>{% endif %}
+    </div>
+  </div>
+</footer>

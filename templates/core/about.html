@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% block body_class %}has-sidebar{% endblock %}
+{% block title %}About — {{ site_owner.name }}{% endblock %}
+
+{% block content %}
+<section class="section section-cream" data-reveal>
+  <div class="section-inner narrow">
+    <p class="section-number">01</p>
+    <h1 class="section-title">About Me</h1>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section class="section section-beige" data-reveal>
+  <div class="section-inner narrow">
+    <h2 class="about-subhead">01 — Who I Am</h2>
+    <h3 class="about-name">Maryam Bukar</h3>
+    <p class="about-tagline">Data Science &amp; Analytics · Software Development</p>
+    <p>I am a Data Science &amp; Analytics student at the American University of Nigeria (AUN), Yola, with a growing passion for software development, data, and technology.</p>
+    <p>I enjoy understanding problems, breaking them down logically, and using programming and data-driven approaches to develop practical solutions. My journey so far has involved building different projects, strengthening my programming foundation, and exploring how technology can be used to solve real-world problems.</p>
+    <p>I'm particularly interested in the intersection between data and software — using data to understand problems and software to turn ideas into useful solutions.</p>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section class="section section-cream" data-reveal>
+  <div class="section-inner narrow">
+    <h2 class="about-subhead">02 — Education</h2>
+
+    <div class="about-edu-block">
+      <h3>American University of Nigeria</h3>
+      <p class="about-edu-meta">Yola, Nigeria</p>
+      <p class="about-edu-meta">B.Sc. Data Science &amp; Analytics — University Student</p>
+      <p>My university journey has given me the opportunity to develop my knowledge in data science, analytics, programming, and computational problem-solving while continuously expanding my technical abilities.</p>
+      <h4>Academic Highlights</h4>
+      <ul>
+        <li>CGPA: 3.52 / 4.00</li>
+        <li>Dean's List: Recognized for strong academic performance</li>
+        <li>Academic Standing: Good academic standing</li>
+      </ul>
+    </div>
+
+    <div class="about-edu-block">
+      <h3>New Horizons College</h3>
+      <p class="about-edu-meta">Minna, Niger State</p>
+      <p class="about-edu-meta">Secondary Education</p>
+      <p>My secondary education at New Horizons College provided the foundation for my academic journey and helped develop the curiosity and discipline that I continue to apply to my university studies.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section class="section section-beige" data-reveal>
+  <div class="section-inner narrow">
+    <h2 class="about-subhead">03 — What I Do</h2>
+
+    <div class="about-what-grid">
+      <div>
+        <h3>Data Science &amp; Analytics</h3>
+        <p>I am developing my ability to work with data, identify patterns, understand problems and use analytical thinking to support meaningful conclusions.</p>
+      </div>
+      <div>
+        <h3>Software Development</h3>
+        <p>I enjoy building functional applications and systems using programming. My experience so far includes developing projects such as student management systems, GPA/CGPA calculators, authentication systems, library systems, voting applications and other practical programs.</p>
+      </div>
+      <div>
+        <h3>Problem Solving</h3>
+        <p>For me, programming is more than writing code. I enjoy taking a problem, breaking it into smaller parts, designing a logical solution and turning that solution into something functional.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section class="section section-cream" data-reveal>
+  <div class="section-inner narrow">
+    <h2 class="about-subhead">04 — My Technical Journey</h2>
+    <p>My technical journey has developed progressively through university coursework, independent learning and hands-on projects.</p>
+    <p>I started by building a foundation in programming and gradually began working on more structured applications and systems. This has helped me understand concepts such as programming logic, functions, data structures, authentication, databases, backend development and application design.</p>
+
+    <div class="about-what-grid">
+      <div>
+        <h3>Python Development</h3>
+        <p>Programming fundamentals, logic, functions and application development.</p>
+      </div>
+      <div>
+        <h3>Data &amp; Analytics</h3>
+        <p>Developing my understanding of data analysis and data-driven problem solving.</p>
+      </div>
+      <div>
+        <h3>Backend Development</h3>
+        <p>Working with Django and building database-driven web applications.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section class="section section-beige" data-reveal>
+  <div class="section-inner narrow">
+    <h2 class="about-subhead">05 — My Direction</h2>
+    <h3>Where I'm Going</h3>
+    <p>I am still at the beginning of my professional journey, and I see that as an opportunity to keep learning, experimenting and building.</p>
+    <p>My goal is to become a well-rounded technology professional who can combine data science, analytics and software development to create useful and intelligent solutions.</p>
+    <p class="about-progression">Learning → Building → Solving → Growing</p>
+    <p>Through future projects, professional experiences and continued education, I hope to develop the technical expertise and practical experience needed to contribute meaningfully to the technology industry.</p>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section class="section section-dark" data-reveal>
+  <div class="section-inner narrow">
+    <h2 class="about-subhead about-subhead-light">06 — This Portfolio</h2>
+    <p>This website is more than a collection of projects.</p>
+    <p>It is a record of my academic journey, technical development and growth as a future technology professional.</p>
+    <p>Some sections are still marked COMING SOON because I am continuing to build them. As I gain new experience, complete projects and earn relevant certifications, this portfolio will grow with me.</p>
+    <p class="about-more">More to come.</p>
+
+    <div class="about-cta-row">
+      <a href="{% url 'portfolio:projects_list' %}" target="_blank" rel="noopener" class="btn btn-caramel">View My Projects</a>
+      <a href="{% url 'core:download_cv' %}" class="btn btn-outline-light">Download My CV</a>
+      <a href="{% url 'contact:contact' %}" class="btn btn-outline-light">Get In Touch</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

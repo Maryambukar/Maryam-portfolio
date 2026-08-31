@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Certifications — {{ site_owner.name }}{% endblock %}
+{% block body_class %}has-sidebar{% endblock %}
+
+{% block content %}
+<section class="section section-cream" data-reveal>
+  <div class="section-inner">
+    <p class="section-number">Certifications</p>
+    <h1 class="section-title">All Certifications</h1>
+
+    {% if certifications %}
+      <div class="card-grid">
+        {% for cert in certifications %}
+        <div class="cert-card">
+          <span class="cert-icon">🎓</span>
+          <div class="cert-info">
+            <h3>{{ cert.title }}</h3>
+            {% if cert.issuer %}<p>{{ cert.issuer }}{% if cert.date_earned %} — {{ cert.date_earned|date:"Y" }}{% endif %}</p>{% endif %}
+          </div>
+          {% if cert.certificate_image %}
+            <a href="{{ cert.certificate_image.url }}" target="_blank" rel="noopener" class="btn btn-tiny">View certificate</a>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="section-lead">Professional certifications and industry credentials will be displayed here.</p>
+      <p class="coming-soon">COMING SOON</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

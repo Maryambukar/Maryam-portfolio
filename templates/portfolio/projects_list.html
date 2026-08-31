@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Projects — {{ site_owner.name }}{% endblock %}
+{% block body_class %}has-sidebar{% endblock %}
+
+{% block content %}
+<section class="section section-cream" data-reveal>
+  <div class="section-inner">
+    <p class="section-number">Projects</p>
+    <h1 class="section-title">All Projects</h1>
+
+    {% if projects %}
+      <div class="card-grid">
+        {% for project in projects %}
+        <div class="project-card">
+          {% if project.thumbnail %}
+            <img src="{{ project.thumbnail.url }}" alt="{{ project.title }}" class="project-thumb">
+          {% endif %}
+          <h3>{{ project.title }}</h3>
+          {% if project.description %}<p>{{ project.description }}</p>{% endif %}
+          {% if project.tech_list %}
+            <div class="tag-row tag-row-small">
+              {% for tech in project.tech_list %}<span class="tag">{{ tech }}</span>{% endfor %}
+            </div>
+          {% endif %}
+          {% if project.project_url %}
+            <a href="{{ project.project_url }}" target="_blank" rel="noopener" class="link-arrow">Visit Project →</a>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="section-lead">Selected software development and data science projects will appear here.</p>
+      <p class="coming-soon">COMING SOON</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

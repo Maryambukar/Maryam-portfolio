@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_class %}has-sidebar{% endblock %}
+
+{% block content %}
+
+<!-- SECTION 01 — HERO -->
+<section class="section section-dark" id="hero" data-reveal>
+  <div class="section-inner">
+    <p class="eyebrow">Hello! I'm</p>
+    <h1 class="hero-name">{{ site_owner.name }}</h1>
+    <p class="hero-headline">{{ site_owner.headline }}</p>
+    {% if site_owner.bio %}<p class="hero-bio">{{ site_owner.bio }}</p>{% endif %}
+    <div class="hero-actions">
+      <a href="{% url 'portfolio:projects_list' %}" target="_blank" rel="noopener" class="btn btn-caramel">View My Projects →</a>
+      <a href="{% url 'contact:contact' %}" class="btn btn-outline-light">Contact Me</a>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 02 — ABOUT (preview) -->
+<section class="section section-cream" id="about" data-reveal>
+  <div class="section-inner">
+    <p class="section-number">02</p>
+    <h2 class="section-title">About</h2>
+    <p class="section-lead">
+      A Data Science &amp; Analytics student developing software development skills, building technical
+      projects, and interested in combining data, technology and problem solving.
+    </p>
+    <a href="{% url 'core:about' %}" class="link-arrow">Read the full story →</a>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 03 — EDUCATION -->
+<section class="section section-beige" id="education" data-reveal>
+  <div class="section-inner">
+    <p class="section-number">03</p>
+    <h2 class="section-title">Education</h2>
+
+    {% if education_entries %}
+    <div class="carousel" data-carousel>
+      <button class="carousel-arrow carousel-arrow-prev" data-carousel-prev aria-label="Previous">‹</button>
+      <div class="carousel-track">
+        {% for edu in education_entries %}
+        <div class="carousel-page">
+          <div class="edu-card">
+            <div class="edu-card-head">
+              <h3>{{ edu.institution }}</h3>
+              {% if edu.period %}<span class="badge">{{ edu.period }}</span>{% endif %}
+            </div>
+            {% if edu.program %}<p class="edu-program">{{ edu.program }}</p>{% endif %}
+            {% if edu.location %}<p class="edu-location">{{ edu.location }}</p>{% endif %}
+            {% if edu.description %}<p class="edu-description">{{ edu.description }}</p>{% endif %}
+            {% if academic_facts and forloop.first %}
+              <ul class="edu-facts">
+                {% if academic_facts.cgpa %}<li>Current CGPA: {{ academic_facts.cgpa }}</li>{% endif %}
+                {% if academic_facts.deans_list %}<li>Consistently on Dean's List{% if academic_facts.deans_list_detail %} — {{ academic_facts.deans_list_detail }}{% endif %}</li>{% endif %}
+              </ul>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <button class="carousel-arrow carousel-arrow-next" data-carousel-next aria-label="Next">›</button>
+    </div>
+    {% else %}
+      <p class="empty-state">Education details will be displayed here soon.</p>
+    {% endif %}
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 04 — CERTIFICATIONS -->
+<section class="section section-cream" id="certifications" data-reveal>
+  <div class="section-inner">
+    <p class="section-number">04</p>
+    <h2 class="section-title">Certifications</h2>
+
+    {% if certifications %}
+      <div class="card-grid" data-readmore data-readmore-limit="2">
+        {% for cert in certifications %}
+        <div class="cert-card{% if not forloop.first and not forloop.counter == 2 %} readmore-hidden{% endif %}">
+          <span class="cert-icon">🎓</span>
+          <div class="cert-info">
+            <h3>{{ cert.title }}</h3>
+            {% if cert.issuer %}<p>{{ cert.issuer }}{% if cert.date_earned %} — {{ cert.date_earned|date:"Y" }}{% endif %}</p>{% endif %}
+          </div>
+          {% if cert.certificate_image %}
+            <a href="{{ cert.certificate_image.url }}" target="_blank" rel="noopener" class="btn btn-tiny">View image</a>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      {% if certifications|length > 2 %}
+        <button class="link-arrow read-more-toggle" data-readmore-toggle>Read more →</button>
+      {% endif %}
+    {% else %}
+      <p class="section-lead">Professional certifications and industry credentials will be displayed here.</p>
+      <p class="coming-soon">COMING SOON</p>
+    {% endif %}
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 05 — TECHNICAL SKILLS -->
+<section class="section section-beige" id="skills" data-reveal>
+  <div class="section-inner">
+    <p class="section-number">05</p>
+    <h2 class="section-title">Technical Skills</h2>
+
+    {% if skill_categories %}
+      {% for cat in skill_categories %}
+        {% if cat.skills.all %}
+        <div class="skill-category" data-carousel-group>
+          <h3>{{ cat.name }}</h3>
+          <div class="carousel carousel-tags" data-carousel>
+            <button class="carousel-arrow carousel-arrow-prev" data-carousel-prev aria-label="Previous">‹</button>
+            <div class="carousel-track carousel-track-tags">
+              <div class="carousel-page">
+                <div class="tag-row">
+                  {% for skill in cat.skills.all %}
+                    <span class="tag">{{ skill.name }}</span>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <button class="carousel-arrow carousel-arrow-next" data-carousel-next aria-label="Next">›</button>
+          </div>
+        </div>
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      <p class="section-lead">Technical skills and tools will be showcased here.</p>
+      <p class="coming-soon">COMING SOON</p>
+    {% endif %}
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 06 — FEATURED PROJECTS -->
+<section class="section section-cream" id="projects" data-reveal>
+  <div class="section-inner">
+    <p class="section-number">06</p>
+    <h2 class="section-title">Featured Projects</h2>
+
+    {% if projects %}
+      <div class="card-grid" data-readmore data-readmore-limit="3">
+        {% for project in projects %}
+        <div class="project-card{% if forloop.counter > 3 %} readmore-hidden{% endif %}">
+          <h3>{{ project.title }}</h3>
+          {% if project.description %}<p>{{ project.description }}</p>{% endif %}
+          {% if project.tech_list %}
+            <div class="tag-row tag-row-small">
+              {% for tech in project.tech_list %}<span class="tag">{{ tech }}</span>{% endfor %}
+            </div>
+          {% endif %}
+          <a href="{% url 'portfolio:projects_list' %}" target="_blank" rel="noopener" class="link-arrow">View Project →</a>
+        </div>
+        {% endfor %}
+      </div>
+      {% if projects|length > 3 %}
+        <button class="link-arrow read-more-toggle" data-readmore-toggle>Read more →</button>
+      {% endif %}
+    {% else %}
+      <p class="section-lead">Selected software development and data science projects will appear here.</p>
+      <p class="coming-soon">COMING SOON</p>
+    {% endif %}
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 07 — EXPERIENCE -->
+<section class="section section-dark" id="experience" data-reveal>
+  <div class="section-inner">
+    <p class="section-number">07</p>
+    <h2 class="section-title">Experience</h2>
+
+    {% if experiences %}
+    <div class="carousel" data-carousel>
+      <button class="carousel-arrow carousel-arrow-prev" data-carousel-prev aria-label="Previous">‹</button>
+      <div class="carousel-track">
+        {% for exp in experiences %}
+        <div class="carousel-page">
+          <div class="exp-card">
+            <div class="exp-card-head">
+              <h3>{{ exp.role_title }}</h3>
+              {% if exp.period %}<span class="badge">{{ exp.period }}</span>{% endif %}
+            </div>
+            {% if exp.organization %}<p class="exp-org">{{ exp.organization }}</p>{% endif %}
+            {% if exp.description %}<p class="exp-description">{{ exp.description }}</p>{% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <button class="carousel-arrow carousel-arrow-next" data-carousel-next aria-label="Next">›</button>
+    </div>
+    {% else %}
+      <p class="section-lead">Professional experience, internships and relevant work will be displayed here.</p>
+      <p class="coming-soon">COMING SOON</p>
+    {% endif %}
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ACHIEVEMENTS -->
+<section class="section section-beige" id="achievements" data-reveal>
+  <div class="section-inner">
+    <p class="section-number">★</p>
+    <h2 class="section-title">Achievements &amp; Leadership</h2>
+
+    {% if achievements %}
+    <div class="carousel" data-carousel>
+      <button class="carousel-arrow carousel-arrow-prev" data-carousel-prev aria-label="Previous">‹</button>
+      <div class="carousel-track">
+        {% for ach in achievements %}
+        <div class="carousel-page">
+          <div class="achievement-item">
+            <span class="check">✓</span>
+            <div>
+              <h3>{{ ach.title }}</h3>
+              {% if ach.detail %}<p>{{ ach.detail }}</p>{% endif %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <button class="carousel-arrow carousel-arrow-next" data-carousel-next aria-label="Next">›</button>
+    </div>
+    {% else %}
+      <p class="coming-soon">COMING SOON</p>
+    {% endif %}
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 08 — CONTACT -->
+<section class="section section-dark" id="contact" data-reveal>
+  <div class="section-inner">
+    <p class="section-number">08</p>
+    <h2 class="section-title">Contact</h2>
+    <p class="section-lead">
+      {% if site_owner.email %}{{ site_owner.email }}{% endif %}
+      {% if site_owner.phone %} &nbsp;|&nbsp; {{ site_owner.phone }}{% endif %}
+    </p>
+    <a href="{% url 'contact:contact' %}" class="btn btn-caramel">Go to Contact Page →</a>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{% static 'js/carousel.js' %}"></script>
+{% endblock %}

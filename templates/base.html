@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ site_owner.name }} — Portfolio{% endblock %}</title>
+  <meta name="description" content="{{ site_owner.headline }}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+
+  <!-- Mobile top bar -->
+  <header class="topbar">
+    <button class="drawer-toggle" id="drawerToggle" aria-label="Open navigation menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="{% url 'core:home' %}" class="topbar-brand">
+      <span class="brand-mark">M</span>
+      <span class="brand-text">{{ site_owner.name }}</span>
+    </a>
+    <div class="topbar-actions">
+      <a href="{% url 'core:download_cv' %}" class="btn btn-caramel btn-sm">Download CV</a>
+    </div>
+  </header>
+
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+
+  {% include 'includes/sidebar.html' %}
+
+  <main class="site-main">
+    {% if messages %}
+      <div class="site-messages">
+        {% for message in messages %}
+          <div class="site-message site-message-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% block content %}{% endblock %}
+    {% include 'includes/footer.html' %}
+  </main>
+
+  {% include 'includes/chatbot_widget.html' %}
+
+  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/chatbot.js' %}"></script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

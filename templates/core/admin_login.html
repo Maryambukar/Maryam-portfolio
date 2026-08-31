@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Admin Login{% endblock %}
+
+{% block content %}
+<section class="section section-dark admin-login-section" data-reveal>
+  <div class="section-inner narrow">
+    <h1 class="section-title">Admin Login</h1>
+    <div class="admin-warning">
+      ⚠ This page is reserved for the site administrator only. It is not a
+      visitor login. Unauthorized attempts are logged (IP address, browser
+      and timestamp) and repeated failed attempts will lock this account out.
+    </div>
+
+    <form method="post" class="contact-form">
+      {% csrf_token %}
+      <div class="form-field">
+        <label for="{{ form.username.id_for_label }}">Username</label>
+        {{ form.username }}
+      </div>
+      <div class="form-field">
+        <label for="{{ form.password.id_for_label }}">Password</label>
+        {{ form.password }}
+      </div>
+      {% if form.non_field_errors %}
+        <p class="form-error">{{ form.non_field_errors.0 }}</p>
+      {% endif %}
+      <button type="submit" class="btn btn-caramel">Sign In</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% load static %}
+<div class="chatbot-widget" id="chatbotWidget">
+  <button class="chatbot-toggle" id="chatbotToggle" aria-label="Open portfolio assistant">💬</button>
+
+  <div class="chatbot-panel" id="chatbotPanel" hidden>
+    <div class="chatbot-header">
+      <span>Portfolio Assistant</span>
+      <button class="chatbot-close" id="chatbotClose" aria-label="Close chat">&times;</button>
+    </div>
+    <div class="chatbot-messages" id="chatbotMessages">
+      <div class="chatbot-message chatbot-message-bot">
+        Hi! I'm Maryam's portfolio assistant. Ask me about her education, skills, projects or experience.
+      </div>
+    </div>
+    <form class="chatbot-input-row" id="chatbotForm">
+      {% csrf_token %}
+      <input type="text" id="chatbotInput" placeholder="Ask a question…" autocomplete="off" maxlength="500">
+      <button type="submit" aria-label="Send">➤</button>
+    </form>
+  </div>
+</div>

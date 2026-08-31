@@ -1,0 +1,53 @@
+{% load static %}
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-inner">
+    <a href="{% url 'core:home' %}" class="sidebar-brand">
+      <span class="brand-mark">M</span>
+      <span class="brand-name">{{ site_owner.name }}</span>
+    </a>
+
+    <nav class="sidebar-nav" aria-label="Main navigation">
+      <a href="{% url 'core:home' %}#hero" class="sidebar-link" data-section="hero">
+        <span class="nav-index">01</span><span>Home</span>
+      </a>
+      <a href="{% url 'core:about' %}" class="sidebar-link">
+        <span class="nav-index">02</span><span>About</span>
+      </a>
+      <a href="{% url 'core:home' %}#education" class="sidebar-link" data-section="education">
+        <span class="nav-index">03</span><span>Education</span>
+      </a>
+      <a href="{% url 'portfolio:certifications_list' %}" class="sidebar-link" target="_blank" rel="noopener">
+        <span class="nav-index">04</span><span>Certifications</span>
+      </a>
+      <a href="{% url 'portfolio:projects_list' %}" class="sidebar-link" target="_blank" rel="noopener">
+        <span class="nav-index">05</span><span>Projects</span>
+      </a>
+      <a href="{% url 'core:home' %}#experience" class="sidebar-link" data-section="experience">
+        <span class="nav-index">06</span><span>Experience</span>
+      </a>
+      <a href="{% url 'contact:contact' %}" class="sidebar-link">
+        <span class="nav-index">07</span><span>Contact</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-actions">
+      <a href="{% url 'core:download_cv' %}" class="btn btn-caramel btn-block">Download CV</a>
+      {% if request.user.is_authenticated and request.user.is_superuser %}
+        <a href="{% url 'dashboard:home' %}" class="btn btn-outline btn-block">Dashboard</a>
+      {% else %}
+        <a href="{% url 'core:admin_login' %}" class="btn btn-outline btn-block">Admin Login</a>
+      {% endif %}
+    </div>
+
+    {% if site_owner.linkedin_url or site_owner.github_url %}
+    <div class="sidebar-social">
+      {% if site_owner.linkedin_url %}
+        <a href="{{ site_owner.linkedin_url }}" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
+      {% endif %}
+      {% if site_owner.github_url %}
+        <a href="{{ site_owner.github_url }}" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+</aside>

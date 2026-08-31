@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<section class="section section-cream" data-reveal>
+  <div class="section-inner">
+    <p class="section-number">Dashboard</p>
+    <h1 class="section-title">Welcome back, {{ request.user.first_name|default:request.user.username }}</h1>
+    <p class="section-lead">Edit anything on the front end from here.</p>
+
+    <div class="card-grid">
+      {% for section in sections %}
+      <a href="{{ section.url }}" class="dashboard-card">{{ section.label }} →</a>
+      {% endfor %}
+    </div>
+
+    <a href="{% url 'dashboard:logout' %}" class="btn btn-outline" style="margin-top:2rem;">Log out</a>
+  </div>
+</section>
+{% endblock %}
